@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🎉 Confirmação de Presença – Arraiá das Concentrações 🎉</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: #fff8e1;
+      border-radius: 10px;
+      border: 1px solid #ffd54f;
+    }
+    h1 {
+      text-align: center;
+      color: #bf360c;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    .hidden {
+      display: none;
+    }
+    .btn {
+      margin-top: 25px;
+      background-color: #388e3c;
+      color: white;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .btn:hover {
+      background-color: #2e7d32;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Arraiá das Concentrações 🎉</h1>
+  <p>Oi, sô! O nosso arraiá tá chegando e vai ser bão demais da conta! Pra gente preparar tudo com capricho, responde aí se ocê vai poder participar.</p>
+  <p><strong>⚠️ Lembre-se: o traje típico é obrigatório! 👒👢</strong></p>
+
+  <form id="rsvpForm">
+    <label>1. Nome completo do convidado:
+      <input type="text" name="nome" required>
+    </label>
+
+    <label>2. Vai poder comparecer ao nosso Arraiá?
+      <select name="presenca" id="presenca" required>
+        <option value="">Selecione…</option>
+        <option value="Sim">Sim, com certeza estarei lá!</option>
+        <option value="Nao">Infelizmente, não poderei ir 😢</option>
+      </select>
+    </label>
+
+    <div id="extraFields" class="hidden">
+      <label>3. Vai levar algum acompanhante?
+        <select name="acompanhante" id="acompanhante">
+          <option value="">Selecione…</option>
+          <option value="Sim">Sim</option>
+          <option value="Nao">Não</option>
+        </select>
+      </label>
+
+      <label id="acompanhanteNomeLabel" class="hidden">Nome do(a) acompanhante:
+        <input type="text" name="nomeAcompanhante" id="nomeAcompanhante">
+      </label>
+
+      <label>4. Qual prato típico pretende levar?
+        <textarea name="prato" rows="3" placeholder="Ex: canjica, pamonha, bolo de milho…"></textarea>
+      </label>
+    </div>
+
+    <button type="submit" class="btn">Enviar Confirmação</button>
+  </form>
+
+  <script>
+    const presenca = document.getElementById('presenca');
+    const extraFields = document.getElementById('extraFields');
+    const acompanhante = document.getElementById('acompanhante');
+    const acompanhanteNomeLabel = document.getElementById('acompanhanteNomeLabel');
+
+    presenca.addEventListener('change', () => {
+      if (presenca.value === 'Sim') {
+        extraFields.classList.remove('hidden');
+      } else {
+        extraFields.classList.add('hidden');
+      }
+    });
+
+    acompanhante.addEventListener('change', () => {
+      if (acompanhante.value === 'Sim') {
+        acompanhanteNomeLabel.classList.remove('hidden');
+      } else {
+        acompanhanteNomeLabel.classList.add('hidden');
+      }
+    });
+
+    document.getElementById('rsvpForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (presenca.value === 'Nao') {
+        alert('Obrigado por avisar! Até a próxima! 😊');
+      } else {
+        alert('Confirmação recebida! Nos vemos no Arraiá das Concentrações! 🎊\nE não esquece: traje típico é obrigatório! 👒👢');
+      }
+      e.target.reset();
+      extraFields.classList.add('hidden');
+      acompanhanteNomeLabel.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>
